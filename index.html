@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="./favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<link href="./_app/immutable/assets/0.DVVwI2Ib.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/2.BxLUUtFi.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.Do1vbQOV.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/entry.Cjz2p8II.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/scheduler.BeaK0CkN.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/paths.C5ZmjW60.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.-Lt3VFBM.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.Dgf2WNjT.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/0.C_mUT3u5.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/2.wSTQ3EMc.js">
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">  <main class="svelte-12phfo9"><h1 data-svelte-h="svelte-1p2btf1">GQLPDSS Quick Start</h1> <h3 data-svelte-h="svelte-28om0j">Propósito</h3> <p data-svelte-h="svelte-youenv">Construir una api graphql para un blog</p> <h3 data-svelte-h="svelte-1aeufi1">Funcionalidad</h3> <ul data-svelte-h="svelte-k2rw53"><li>CRUD Autores</li> <li>CRUD Post</li> <li>CRUD Comentarios</li></ul> <h3 data-svelte-h="svelte-1bxta78">Requisitos</h3> <ul data-svelte-h="svelte-13b275c"><li>PHP versión 7.4 o superior</li> <li>PHP Composer</li> <li>Conexión a base de datos MySQL</li></ul> <h2 data-svelte-h="svelte-1358idw">Crear proyecto</h2> <code data-svelte-h="svelte-1m0ja7p">composer create-project wappcode/gql-pdss-skeleton my-project</code> <h2 data-svelte-h="svelte-1bmome6">Configuración de la Base de Datos</h2> <p data-svelte-h="svelte-r4b64x">Antes de comenzar, asegúrate de tener MySQL configurado y crea una base de datos para tu
+		aplicación.</p> <h3 data-svelte-h="svelte-sav7d">Crear el Archivo de Configuración de Doctrine</h3> <p data-svelte-h="svelte-zcxq70">Crea un archivo llamado <strong><code>config/doctrine.local.php</code></strong> y agrega el siguiente
+		código:</p> <code class="svelte-1a9oexy"><pre>&lt;?php return [ &#39;driver&#39; =&gt; [ &#39;user&#39; =&gt; &#39;root&#39;,
+		&#39;password&#39; =&gt; &#39;rootpassword&#39;, &#39;driver&#39; =&gt;
+		&#39;pdo_mysql&#39;, &#39;host&#39; =&gt; &#39;localhost&#39;, &#39;dbname&#39; =&gt;
+		&#39;&#39;, &#39;charset&#39; =&gt; &#39;utf8mb4&#39; ], &#39;entities&#39; =&gt;
+		require __DIR__ . &#39;/doctrine.entities.php&#39; ];</pre> </code> <p data-svelte-h="svelte-1vmqq03">Asegúrate de reemplazar los siguientes valores con la información correspondiente a tu servidor
+		de base de datos:</p> <ul data-svelte-h="svelte-1r047ec"><li><strong>&#39;user&#39;:</strong> El nombre de usuario de tu base de datos.</li> <li><strong>&#39;password&#39;:</strong> La contraseña de tu base de datos.</li> <li><strong>&#39;host&#39;:</strong> La dirección del servidor de la base de datos.</li> <li><strong>&#39;dbname&#39;:</strong> El nombre de la base de datos que has creado.</li></ul> <p data-svelte-h="svelte-k8ej9b">Si estás utilizando una base de datos que no sea MySQL, ajusta el valor de &#39;driver&#39; según
+		corresponda.</p> <hr> <h1 data-svelte-h="svelte-pmioaq">Permisos de Escritura para la Carpeta &quot;data&quot;</h1> <p data-svelte-h="svelte-1lov2qu">Para asegurar el correcto funcionamiento de la aplicación, es importante otorgar permisos de
+		escritura a la carpeta &quot;data&quot;. A continuación, se detallan los pasos para hacerlo en diferentes
+		sistemas operativos:</p> <h2 data-svelte-h="svelte-1s9pnhi">Linux:</h2> <p data-svelte-h="svelte-g0dd">En sistemas Linux, puedes usar el comando <code>chmod</code> para cambiar los permisos de la carpeta
+		&quot;data&quot; y otorgar permisos de escritura. Abre tu terminal y ejecuta el siguiente comando:</p> <pre data-svelte-h="svelte-1nbmolf"><code>chmod a+w data</code></pre> <p data-svelte-h="svelte-r9qu52">Esto permitirá que cualquier usuario en el sistema pueda escribir en la carpeta &quot;data&quot;.</p> <h2 data-svelte-h="svelte-1h0d4jf">Windows:</h2> <p data-svelte-h="svelte-1wmx2de">En sistemas Windows, puedes cambiar los permisos de la carpeta &quot;data&quot; a través de la interfaz
+		gráfica del explorador de archivos:</p> <ol data-svelte-h="svelte-1vh2x7f"><li>Navega hasta la carpeta &quot;data&quot;.</li> <li>Haz clic derecho sobre la carpeta y selecciona &quot;Propiedades&quot;.</li> <li>Ve a la pestaña &quot;Seguridad&quot;.</li> <li>Haz clic en &quot;Editar&quot; y luego en &quot;Agregar&quot;.</li> <li>Escribe &quot;Todos&quot; en el campo de nombres de objetos y haz clic en &quot;Comprobar nombres&quot;.</li> <li>Haz clic en &quot;Aceptar&quot; para cerrar la ventana de selección de usuarios.</li> <li>Selecciona el usuario &quot;Todos&quot; en la lista de nombres de grupos o usuarios y marca la casilla
+			&quot;Control total&quot; en la columna &quot;Permitir&quot;.</li> <li>Haz clic en &quot;Aplicar&quot; y luego en &quot;Aceptar&quot; para aplicar los cambios.</li></ol> <p data-svelte-h="svelte-15xgjxw">Esto otorgará permisos de escritura a todos los usuarios en la carpeta &quot;data&quot;.</p> <h2 data-svelte-h="svelte-1i9tuxf">macOS:</h2> <p data-svelte-h="svelte-8thxz3">En macOS, puedes usar el comando <code>chmod</code> de manera similar a como se hace en Linux. Abre
+		la Terminal y ejecuta el siguiente comando:</p> <pre data-svelte-h="svelte-1nbmolf"><code>chmod a+w data</code></pre> <p data-svelte-h="svelte-r9qu52">Esto permitirá que cualquier usuario en el sistema pueda escribir en la carpeta &quot;data&quot;.</p> <p data-svelte-h="svelte-11qy8jb"><strong>Recuerda en entornos de producción aplicar las mejores prácticas de seguridad y otorgar
+			permisos solo a los grupos y usuarios relevantes.</strong></p> <hr> <h1 data-svelte-h="svelte-hk2zj">Crear Entidad Author (Autor)</h1> <p data-svelte-h="svelte-18zwt83">Para definir una entidad Doctrine que represente un autor, crea un nuevo archivo <code>Author.php</code>
+		en la siguiente ubicación: <code>modules/AppModule/src/Entities/Author.php</code> y agrega el siguiente
+		código:</p> <code class="svelte-1a9oexy"><pre>&lt;?php namespace AppModule\Entities; use Doctrine\ORM\Mapping as ORM; use
+		GPDCore\Entities\AbstractEntityModel; class Author extends AbstractEntityModel{
+
+		/** * * @ORM\Column(type=&quot;string&quot;, length=255, nullable=false,
+		name=&quot;first_name&quot;) * @var string */ private $firstName; /** *
+		@ORM\Column(type=&quot;string&quot;, length=255, nullable=true, name=&quot;last_name&quot;) * *
+		@var ?string */ private $lastName; /** * @ORM\Column(type=&quot;string&quot;, length=255,
+		nullable=false, name=&quot;email&quot;) * * @var string */ private $email; /** * Get the value
+		of firstName * * @return string */ public function getFirstName()
+		{
+		return $this-&gt;firstName;
+		}
+
+		/** * Set the value of firstName * * @param string $firstName * * @return self */ public
+		function setFirstName(string $firstName)
+		{
+		$this-&gt;firstName = $firstName; return $this;
+		}
+
+		/** * Get the value of lastName * * @return ?string */ public function getLastName()
+		{
+		return $this-&gt;lastName;
+		}
+
+		/** * Set the value of lastName * * @param ?string $lastName * * @return self */ public function
+		setLastName(?string $lastName)
+		{
+		$this-&gt;lastName = $lastName; return $this;
+		}
+
+		/** * Get the value of email * * @return string */ public function getEmail()
+		{
+		return $this-&gt;email;
+		}
+
+		/** * Set the value of email * * @param string $email * * @return self */ public function
+		setEmail(string $email)
+		{
+		$this-&gt;email = $email; return $this;
+		} }</pre> </code> <p data-svelte-h="svelte-eh7jqs">La clase <code>Author</code> es una entidad Doctrine que utiliza anotaciones para definir sus
+		columnas en la base de datos. Esta clase extiende la clase <code>AbstractEntityModel</code>, la
+		cual agrega las propiedades <code>id</code> (clave primaria), <code>created</code> y
+		<code>updated</code>.</p> <p data-svelte-h="svelte-1yvrdfh">Los métodos <code>get</code> se utilizan para generar los campos tipo objeto GraphQL. Para que funcionen
+		correctamente, estos métodos deben ser públicos y tener un tipo de retorno asignado.</p> <p data-svelte-h="svelte-1wmgj6y">Los métodos <code>set</code> se utilizan para generar los tipos de entrada de GraphQL. Deben ser
+		públicos y tener asignado un tipo requerido.</p> <p data-svelte-h="svelte-1cipku0">Para generar el código SQL necesario para actualizar la base de datos, ejecuta el siguiente
+		comando en la terminal:</p> <pre data-svelte-h="svelte-j7tjjo"><code>vendor/bin/doctrine orm:schema-tool:update --dump-sql</code></pre> <p data-svelte-h="svelte-wo1m4s">Para aplicar los cambios en la base de datos, utiliza el siguiente comando:</p> <pre data-svelte-h="svelte-1y1oeo0"><code>vendor/bin/doctrine orm:schema-tool:update --force</code></pre> <hr> <h1 data-svelte-h="svelte-mq7uq9">Registrar un Campo GraphQL para Crear Autores</h1> <p data-svelte-h="svelte-k8rali">Para registrar un campo GraphQL que permita la creación de autores, es necesario crear la clase <code>AppModule</code>
+		para que extienda la clase <code>GPDCore\Library\AbstractModule</code> e implemente los siguientes
+		métodos:</p> <code class="svelte-1a9oexy"><pre>use GPDCore\Library\AbstractModule; use GPDCore\Graphql\GPDFieldFactory; use
+		AppModule\Entities\Author; class AppModule extends AbstractModule
+		{
+		// Otros métodos y propiedades de la clase AppModule public function getConfig(): array
+		{
+		// Implementación para obtener la configuración de la aplicación
+		}
+
+		public function getServicesAndGQLTypes(): array
+		{
+		// Implementación para obtener los servicios y tipos GraphQL de la aplicación
+		}
+
+		public function getResolvers(): array
+		{
+		// Implementación para obtener los resolutores de la aplicación
+		}
+
+		public function getQueryFields(): array
+		{
+		// Implementación para obtener los campos de consulta GraphQL de la aplicación
+		}
+
+		public function getMutationFields(): array
+		{
+		return [ &#39;createAuthor&#39; =&gt; GPDFieldFactory::buildFieldCreate($this-&gt;context, Author::class)
+		];
+		} }</pre> </code> <p data-svelte-h="svelte-171o5fz">Con estos cambios, la clase <code>AppModule</code> estará completamente configurada para registrar
+		un campo GraphQL que permita la creación de autores en tu aplicación PHP.</p> <p data-svelte-h="svelte-1ui6i2r">En el array devuelto por el método <code>getMutationFields</code>, se agrega un campo GraphQL.
+		La clave de este campo corresponde al nombre que se utilizará en las consultas GraphQL. El valor
+		asociado a esta clave es un objeto GraphQL creado mediante la clase <code>GPDFieldFactory</code>
+		utilizando el método <code>buildFieldCreate</code>.</p> <h1 data-svelte-h="svelte-ic2oig">Crear un Autor mediante Consulta GraphQL</h1> <p data-svelte-h="svelte-b1xlu6">Para probar la creación de un autor, la URL de la API depende de la configuración del servidor y
+		generalmente apunta al archivo principal en la ruta <code>public/index.php/api</code>.</p> <p data-svelte-h="svelte-1ar6scb">Por ejemplo, en un servidor Apache: <code>http://localhost/my-project/public/index.php/api</code></p> <p data-svelte-h="svelte-3lk1bh">También puedes iniciar un servidor PHP desde el directorio de la aplicación con el siguiente
+		comando:</p> <pre data-svelte-h="svelte-9qk7k6"><code>php -S localhost:8000 public/index.php</code></pre> <p data-svelte-h="svelte-1ulvz3f">De esta manera, la URL sería: <code>http://localhost:8080/api</code></p> <p data-svelte-h="svelte-zsuadv">Para realizar la prueba, puedes utilizar una extensión de GraphQL para tu navegador o Postman.</p> <p data-svelte-h="svelte-1fqsxgt">La consulta GraphQL a ejecutar es la siguiente:</p> <code class="svelte-1a9oexy"><pre>mutation {
+		createAuthor(input: {
+		firstName: &quot;John&quot;, lastName: &quot;Doe&quot;, email: &quot;demo@demo.local.lan&quot;
+		}) {
+		id firstName lastName email created updated
+		} }</pre> </code> <p data-svelte-h="svelte-bmmonb">Con la extensión GraphQL Playground para Chrome, puedes ejecutar la consulta y visualizar los
+		resultados directamente en el navegador.</p> <p data-svelte-h="svelte-yyqov3">Al ejecutar la consulta, se guardará un nuevo registro en la base de datos. Los campos <code>id</code>, <code>created</code> y <code>updated</code> son generados automáticamente.</p> <img src="./images/create-author.png" alt=""> <h1 data-svelte-h="svelte-159upjx">Registrar un Campo GraphQL para Recuperar el Registro de un Autor por ID</h1> <p data-svelte-h="svelte-1px18te">Para registrar un campo GraphQL que recupere el registro de un autor por su ID, actualiza el
+		método <code>getQueryFields</code> en el archivo
+		<code>modules/AppModule/src/AppModule.php</code> de la siguiente manera:</p> <code class="svelte-1a9oexy"><pre>function getQueryFields(): array
+		{
+		return [ &#39;getAuthor&#39; =&gt; GPDFieldFactory::buildFieldItem($this-&gt;context, Author::class),
+		];
+		}</pre> </code> <p data-svelte-h="svelte-1sfbius">Para probar la obtención del autor por ID, ejecuta el siguiente query en la extensión de Chrome
+		GraphQL Playground:</p> <code class="svelte-1a9oexy"><pre>query {
+		getAuthor(id: &quot;1&quot;) {
+		id firstName lastName email created updated
+		} }</pre> </code> <p data-svelte-h="svelte-gn5jos"><img src="./images/get-author.png" alt=""></p> <p data-svelte-h="svelte-1kh1jk4">Para hacer más útil la consulta del autor, podemos agregar el nombre completo (<code>fullName</code>). Para ello, primero registramos un método <code>getFullName</code> en la clase
+		<code>Author</code>:</p> <code class="svelte-1a9oexy"><pre>/** * Obtiene el nombre completo. * * @return string */ public function getFullName()
+		{
+		return $this-&gt;firstName . &quot; &quot; . $this-&gt;lastName ?? &quot;&quot;;
+		}</pre> </code> <p data-svelte-h="svelte-1llarx1">Con esto, podemos recuperar el nombre completo de un autor desde la clase <code>Author</code> en
+		PHP, y la propiedad <code>fullName</code> queda registrada en el esquema de GraphQL.</p> <p data-svelte-h="svelte-9bedbo"><img src="./images/get-author-fullname-schema.png" alt=""></p> <p data-svelte-h="svelte-1k7az3">Para que funcione correctamente, es necesario agregar un resolver en la clase <code>Author</code>
+		para <code>fullName</code>. Actualiza el método <code>getResolvers</code> en el archivo
+		<code>modules/AppModule/src/AppModule.php</code> de la siguiente forma:</p> <code class="svelte-1a9oexy"><pre>function getResolvers(): array
+		{
+		return [ &#39;Author::fullName&#39; =&gt; function($root, $args, $context, $info) {
+		return $root[&quot;firstName&quot;] . &quot; &quot; . $root[&quot;lastName&quot;] ?? &#39;&#39;;
+		}
+		];
+		}</pre> </code> <p data-svelte-h="svelte-uiyqgr">Es importante que la clave del array esté compuesta por el nombre de la clase seguido de dos
+		veces dos puntos (<code>::</code>) y el nombre de la propiedad, en este caso,
+		<code>Author::fullName</code>.</p> <p data-svelte-h="svelte-z49rnh">Ahora puedes realizar la consulta solicitando el valor de <code>fullName</code>.</p> <p data-svelte-h="svelte-vt7gxg"><img src="./images/get-author-fullname.png" alt=""></p> <h1 data-svelte-h="svelte-j02il">Registrar un Campo GraphQL para Recuperar la Lista de Autores Registrados</h1> <p data-svelte-h="svelte-zv6eoi">Para obtener la lista de autores registrados, actualiza el método <code>getQueryFields</code> en
+		el archivo <code>modules/AppModule/src/AppModule.php</code> de la siguiente manera:</p> <code class="svelte-1a9oexy"><pre>function getQueryFields(): array
+		{
+		return [ &#39;getAuthor&#39; =&gt; GPDFieldFactory::buildFieldItem($this-&gt;context, Author::class),
+		&#39;getAuthorsList&#39; =&gt; GPDFieldFactory::buildFieldList($this-&gt;context, Author::class),
+		];
+		}</pre> </code> <p data-svelte-h="svelte-1nve7ak">Ahora puedes realizar consultas GraphQL para recuperar todos los autores registrados.</p> <p data-svelte-h="svelte-1wt5327">Antes de realizar la prueba, puedes crear más autores utilizando la entrada <code>createAuthor</code> para poder visualizar mejor el resultado.</p> <p data-svelte-h="svelte-6jnelj">Para probar, ejecuta el siguiente query en la extensión GraphQL:</p> <code class="svelte-1a9oexy"><pre>query {
+		getAuthorsList {
+		fullName firstName lastName id created updated
+		} }</pre> </code> <p data-svelte-h="svelte-gqlnwg"><img src="./images/authors-list.png" alt=""></p> <p data-svelte-h="svelte-t417to">La consulta <code>getAuthorsList</code> ya incluye opciones para ordenar y filtrar. Por ejemplo,
+		para filtrar los resultados por nombre, puedes ejecutar la siguiente consulta:</p> <code class="svelte-1a9oexy"><pre>query {
+		getAuthorsList(filter: [
+		{
+		conditions: [
+		{
+		filterOperator: LIKE, value: {
+		single: &quot;%john%&quot;
+		}, property: &quot;firstName&quot;
+		}
+		]
+		}
+		]) {
+		fullName firstName lastName id created updated
+		} }</pre> </code> <img src="./images/authors-list-filter.png" alt=""> <p data-svelte-h="svelte-c766an">Y para ordenar por nombre, puedes ejecutar el siguiente query:</p> <code class="svelte-1a9oexy"><pre>query {
+		getAuthorsList(sorting: [
+		{
+		property: &quot;firstName&quot;, direction: desc
+		}
+		]) {
+		fullName firstName lastName id created updated
+		} }</pre> </code> <p data-svelte-h="svelte-vun94d"><strong>NOTA:</strong> Puedes utilizar filtros y orden en la misma consulta.</p> <h1 data-svelte-h="svelte-147e71l">Registrar un Campo GraphQL para Recuperar la Lista Paginada de Autores</h1> <p data-svelte-h="svelte-6l2gby">Antes de agregar la entrada para consultar la lista paginada, es necesario registrar los tipos <code>connection</code>
+		y <code>Edge</code> para el tipo de dato que se va a consultar, en este caso
+		<code>Author</code>.</p> <p data-svelte-h="svelte-g09q80">En la carpeta <code>modules/AppModule/src/Graphql</code>, crea el archivo
+		<code>AuthorEdgeFactory.php</code> con el siguiente código:</p> <code class="svelte-1a9oexy"><pre>&lt;?php namespace AppModule\Graphql; use GPDCore\Library\AbstractEdgeTypeServiceFactory; class
+		AuthorEdgeFactory extends AbstractEdgeTypeServiceFactory {
+
+		const NAME = &#39;AuthorEdge&#39;; const DESCRIPTION = &#39;&#39;; protected static $instance = null;
+		}</pre> </code> <p data-svelte-h="svelte-iqom9y">Esta clase extiende a <code>AbstractEdgeTypeServiceFactory</code>, que tiene los métodos
+		necesarios para construir el objeto GraphQL <code>AuthorEdge</code>.</p> <p data-svelte-h="svelte-p4t8lh">La constante <code>NAME</code> corresponde al nombre del objeto GraphQL que se va a crear y no
+		debe contener caracteres especiales ni espacios en blanco. La constante <code>DESCRIPTION</code>
+		corresponde a la descripción del objeto GraphQL que se va a crear. La propiedad estática
+		<code>$instance</code> es importante porque es donde se almacenará la instancia del objeto GraphQL
+		una vez que se haya creado, de esta forma solo se creará un solo objeto de este tipo; las siguientes
+		solicitudes para obtener el objeto retornarán el objeto creado previamente.</p> <p data-svelte-h="svelte-1oulrtq">Todos los objetos GraphQL deben ser registrados como servicios. Para crear y registrar como
+		servicio el objeto <code>AuthorEdge</code>, actualiza el método
+		<code>getServicesAndGQLTypes</code>
+		de la clase <code>AppModule</code> en el archivo
+		<code>modules/AppModule/src/AppModule.php</code> de la siguiente forma:</p> <code class="svelte-1a9oexy"><pre>function getServicesAndGQLTypes(): array
+		{
+		return [ &#39;invokables&#39; =&gt; [], &#39;factories&#39; =&gt; [ AuthorEdgeFactory::NAME =&gt;
+		AuthorEdgeFactory::getFactory($this-&gt;context, Author::class) ], &#39;aliases&#39; =&gt; [] ];
+		}</pre> </code> <p data-svelte-h="svelte-ck5nvq">En el array <code>factories</code>, se agrega la clave con el nombre del nuevo objeto (<code>AuthorEdgeFactory::NAME</code>), y como valor se agrega el retorno del método <code>AuthorEdgeFactory::getFactory</code> con
+		los parámetros de contexto (<code>$this-&gt;context</code>) y la clase de la entidad relacionada (<code>Author::class</code>).</p> <p data-svelte-h="svelte-1m9182z">Para el objeto <code>AuthorConnection</code>, se realiza un proceso similar:</p> <p data-svelte-h="svelte-lac6l5">En la carpeta <code>modules/AppModule/src/Graphql</code>, crea el archivo
+		<code>AuthorConnectionFactory.php</code> con el siguiente código:</p> <code class="svelte-1a9oexy"><pre>&lt;?php namespace AppModule\Graphql; use GPDCore\Library\AbstractConnectionTypeServiceFactory;
+		class AuthorConnectionFactory extends AbstractConnectionTypeServiceFactory {
+		const NAME = &#39;AuthorConnection&#39;; const DESCRIPTION = &#39;&#39;; protected static $instance = null;
+		}</pre> </code> <p data-svelte-h="svelte-wk6rbw">Las constantes <code>NAME</code>, <code>DESCRIPTION</code> y <code>$instance</code> tienen la
+		misma funcionalidad que en <code>AuthorEdgeFactory</code>.</p> <p data-svelte-h="svelte-2cqtgr">Se agrega como servicio en la clase <code>AppModule</code>:</p> <code class="svelte-1a9oexy"><pre>function getServicesAndGQLTypes(): array
+		{
+		return [ &#39;invokables&#39; =&gt; [], &#39;factories&#39; =&gt; [ AuthorEdgeFactory::NAME =&gt;
+		AuthorEdgeFactory::getFactory($this-&gt;context, Author::class), AuthorConnectionFactory::NAME =&gt;
+		AuthorConnectionFactory::getFactory($this-&gt;context, AuthorEdgeFactory::NAME) ] ];
+		}</pre> </code> <p data-svelte-h="svelte-1ky5uzz">Para este caso, a <code>AuthorConnectionFactory::getFactory</code> se le pasan las propiedades
+		de contexto y el nombre del objeto Edge relacionado, en este caso
+		<code>AuthorEdgeFactory::NAME</code>
+		(<code>&quot;AuthorEdge&quot;</code>).</p> <p data-svelte-h="svelte-vt4uyz">Siempre es importante recordar que para importar otras clases es necesario agregar los
+		namespaces al inicio del archivo. Por ejemplo, en el archivo <code>AppModule</code>, después de
+		la línea <code>namespace AppModule;</code>, se agregan las líneas:</p> <code class="svelte-1a9oexy"><pre>use AppModule\Graphql\AuthorConnectionFactory; use AppModule\Graphql\AuthorEdgeFactory;</pre> </code> <p data-svelte-h="svelte-7b3ycy">Una vez creados los tipos <code>AuthorEdge</code> y <code>AuthorConnection</code>, se puede
+		actualizar el método <code>getQueryFields</code> de la clase <code>AppModule</code> para agregar
+		la consulta paginada:</p> <code class="svelte-1a9oexy"><pre>function getQueryFields(): array
+		{
+
+		$authorConnection =
+		$this-&gt;context-&gt;getServiceManager()-&gt;get(AuthorConnectionFactory::NAME); return [
+		&#39;echo&#39; =&gt; [ &#39;type&#39; =&gt; Type::nonNull(Type::string()), &#39;args&#39;
+		=&gt; [ &#39;message&#39; =&gt; Type::nonNull(Type::string()) ], &#39;resolve&#39; =&gt;
+		function ($root, $args) &lt;CodeBlockOpenChar /&gt; return $args[&quot;message&quot;];
+		&lt;CodeBlockEndChar /&gt; ], &#39;getAuthor&#39; =&gt;
+		GPDFieldFactory::buildFieldItem($this-&gt;context, Author::class), &#39;getAuthorsList&#39;
+		=&gt; GPDFieldFactory::buildFieldList($this-&gt;context, Author::class),
+		&#39;getAuthorsPaginatedList&#39; =&gt;
+		GPDFieldFactory::buildFieldConnection($this-&gt;context, $authorConnection, Author::class), ];
+		}</pre> </code> <p data-svelte-h="svelte-6714i0">El código</p> <code class="svelte-1a9oexy"><pre>$authorConnection =
+		$this-&gt;context-&gt;getServiceManager()-&gt;get(AuthorConnectionFactory::NAME);</pre> </code> <p data-svelte-h="svelte-z540z">recupera el objeto GraphQL <code>AuthorConnection</code> desde el administrador de servicios y la
+		línea</p> <code class="svelte-1a9oexy"><pre>&#39;getAuthorsPaginatedList&#39; =&gt;
+		GPDFieldFactory::buildFieldConnection($this-&gt;context, $authorConnection, Author::class),</pre> </code> <p data-svelte-h="svelte-1l68yfk">es donde se agrega la entrada para consultar autores de forma paginada.</p> <p data-svelte-h="svelte-1kgecb9">Para probarlo, se puede ejecutar el siguiente query:</p> <code class="svelte-1a9oexy"><pre>query {
+		pagination {
+		first: 1
+		} }</pre> </code> <p data-svelte-h="svelte-2lm40j"><img src="./images/authors-list-pagination.png" alt=""></p> <p data-svelte-h="svelte-1hlbe89">En este caso, se utiliza el input para recuperar las primeras <code>n</code> registros. El resultado
+		contiene la siguiente información:</p> <ul data-svelte-h="svelte-15vd1d9"><li><code>totalCount</code>: Total de elementos.</li> <li><code>pageInfo</code>: Información de la página.</li> <li><code>edges</code>: En la propiedad <code>nodes</code>, se encuentran los datos de los
+			registros consultados.</li></ul> <p data-svelte-h="svelte-1y2u6be">Al igual que la consulta de listas, se tiene la opción para filtrar y ordenar los elementos.</p> <h1 data-svelte-h="svelte-1m65z6q">Registrar un campo graphql para actualizar autores.</h1> <p data-svelte-h="svelte-10bvekv">En el archivo modules/AppModule/src/AppModule.php actuallizar el método getMutationFields para
+		agregar la entrada &#39;updateAuthor&#39; de la siguiente forma.</p> <code class="svelte-1a9oexy"><pre>function getMutationFields(): array
+		{
+		return [ &#39;createAuthor&#39; =&gt; GPDFieldFactory::buildFieldCreate($this-&gt;context, Author::class),
+		&#39;updateAuthor&#39; =&gt; GPDFieldFactory::buildFieldUpdate($this-&gt;context, Author::class),
+		];
+		}</pre> </code> <p data-svelte-h="svelte-1u1xa2e">Probar funcionamiento: En la extensión del navegador para graphql ejecutar la siguiente consulta</p> <code class="svelte-1a9oexy"><pre>mutation UpdateAuthor{
+		updateAuthor(id:&quot;1&quot;, input:{
+		email: &quot;Email Actualizado&quot;
+		}){
+		id fullName email
+		} }</pre> </code> <p data-svelte-h="svelte-19ikop">Para las actualizaciones los inputs son parciales lo que significa que se puede actualizar ya
+		sea todos o solo algunos de datos del registro</p> <h2 data-svelte-h="svelte-14tlt1v">Registrar un campo graphql para eliminar autores.</h2> <p data-svelte-h="svelte-59sakp">En el archivo modules/AppModule/src/AppModule.php actuallizar el método getMutationFields para
+		agregar la entrada deleteAuthorde la siguiente forma.</p> <code class="svelte-1a9oexy"><pre>function getMutationFields(): array
+		{
+		return [ &#39;createAuthor&#39; =&gt; GPDFieldFactory::buildFieldCreate($this-&gt;context, Author::class),
+		&#39;updateAuthor&#39; =&gt; GPDFieldFactory::buildFieldUpdate($this-&gt;context, Author::class),
+		&#39;deleteAuthor&#39; =&gt; GPDFieldFactory::buildFieldDelete($this-&gt;context, Author::class)
+		];
+		}</pre> </code> <p data-svelte-h="svelte-w59yrw">Probar funcionamiento: En la extensión del navegador para graphql ejecutar el siguiente código</p> <code class="svelte-1a9oexy"><pre>mutation DeleteAuthor{
+		deleteAuthor(id:&quot;1&quot;)
+		}</pre> </code> <p data-svelte-h="svelte-5m6rcv">Como resultado la consulta retorna un valor boolean (falso o verdadero) indicando si se realizó
+		correctamente la operación.</p> <h3 data-svelte-h="svelte-w5nat0">Crear registro para POST</h3> <p data-svelte-h="svelte-1geduit">Crear archivo Post.php para la entidad en la siguiente ubicación
+		modules/AppModule/src/Entities/Post.php</p> <code class="svelte-1a9oexy"><pre>&lt;?php // modules/AppModule/src/Entities/Post.php namespace AppModule\Entities; use
+		Doctrine\ORM\Mapping as ORM; use AppModule\Entities\Author; use
+		GPDCore\Entities\AbstractEntityModel; /** * @ORM\Entity * @ORM\Table(name=&quot;posts&quot;) */
+		class Post extends AbstractEntityModel
+		{
+		/** * * @ORM\Column(type=&quot;string&quot;, length=255, nullable=false, name=&quot;title&quot;)
+		* @var string */ private $title; /** * @ORM\Column(type=&quot;text&quot;, nullable=false, name=&quot;body&quot;)
+		* @var string */ private $body; /** * @ORM\ManyToOne(targetEntity=&quot;\AppModule\Entities\Author&quot;,
+		inversedBy=&quot;posts&quot;) * @ORM\JoinColumn(name=&quot;author_id&quot;, referencedColumnName=&quot;id&quot;,
+		nullable=false) * @var Author */ private $author; /** * Get the value of title * * @return string
+		*/ public function getTitle()
+		{
+		return $this-&gt;title;
+		}
+
+		/** * Set the value of title * * @param string $title * * @return self */ public function
+		setTitle(string $title)
+		{
+		$this-&gt;title = $title; return $this;
+		}
+
+		/** * Get the value of body * * @return string */ public function getBody()
+		{
+		return $this-&gt;body;
+		}
+
+		/** * Set the value of body * * @param string $body * * @return self */ public function
+		setBody(string $body)
+		{
+		$this-&gt;body = $body; return $this;
+		}
+
+		/** * Get the value of author * * @return Author */ public function getAuthor()
+		{
+		return $this-&gt;author;
+		}
+
+		/** * Set the value of author * * @param Author $author * * @return self */ public function
+		setAuthor(Author $author)
+		{
+		$this-&gt;author = $author; return $this;
+		}</pre> </code> <p data-svelte-h="svelte-zt3qr9">Se agrega a la clase Author la referencia a los posts</p> <code class="svelte-1a9oexy"><pre>/** * * @ORM\OneToMany(targetEntity=&quot;\AppModule\Entities\Post&quot;,
+		mappedBy=&quot;author&quot;) * @var Collection */ private $posts; /** * Get the value of posts *
+		* @return Collection */ public function getPosts(): Collection
+		{
+		return $this-&gt;posts;
+		}
+
+		/** * Set the value of posts * @API\Exclude * @param Collection $posts * * @return self */
+		public function setPosts(Collection $posts)
+		{
+		$this-&gt;posts = $posts; return $this;
+		}</pre> </code> <p data-svelte-h="svelte-1xg8qib">Como no vamos a crear post desde el registro de autores se agrega a la función setPost la
+		anotación @API\Exclude para que ese método no sea considerado para definir el input de la clase
+		Author.</p> <p data-svelte-h="svelte-1ub2g5z">Es necesario agregar <code>use GraphQL\Doctrine\Annotation as API;</code> en la parte superior de
+		la página para que se incluyan los archivos correspondientes</p> <p data-svelte-h="svelte-p6xstt">Se ejecuta el comando para actualizar la base de datos</p> <code data-svelte-h="svelte-8ayr9b">vendor/bin/doctrine orm:schema-tool:update --force</code> <h1 data-svelte-h="svelte-1nf9nq3">Se agregan en AppModule las entradas para CRUD para Post</h1> <p data-svelte-h="svelte-1501ylq">Crear clase Edge para post</p> <code class="svelte-1a9oexy"><pre>&lt;?php namespace AppModule\Graphql; use GPDCore\Library\AbstractEdgeTypeServiceFactory; class
+		PostEdgeFactory extends AbstractEdgeTypeServiceFactory
+		{
+
+		const NAME = &#39;PostEdge&#39;; const DESCRIPTION = &#39;&#39; protected static $instance =
+		null;
+		}</pre> </code> <p data-svelte-h="svelte-1scht21">Crear clase Connection para post</p> <code class="svelte-1a9oexy"><pre>&lt;?php namespace AppModule\Graphql; use GPDCore\Library\AbstractConnectionTypeServiceFactory;
+		class PostConnectionFactory extends AbstractConnectionTypeServiceFactory &lt;CodeBlockOpenChar
+		/&gt; const NAME = &#39;PostConnection&#39;; const DESCRIPTION = &#39;&#39;; protected
+		static $instance = null; &lt;CodeBlockEndChar /&gt; Registrar los tipos en ServiceManager en el
+		método getServicesAndGQLTypes de la clase AppModule function getServicesAndGQLTypes():
+		array &lt;CodeBlockOpenChar /&gt; return [ &#39;invokables&#39; =&gt; [],
+		&#39;factories&#39; =&gt; [ AuthorEdgeFactory::NAME =&gt;
+		AuthorEdgeFactory::getFactory($this-&gt;context, Author::class), AuthorConnectionFactory::NAME
+		=&gt; AuthorConnectionFactory::getFactory($this-&gt;context, AuthorEdgeFactory::NAME),
+		PostEdgeFactory::NAME =&gt; PostEdgeFactory::getFactory($this-&gt;context, Post::class),
+		PostConnectionFactory::NAME =&gt; PostConnectionFactory::getFactory($this-&gt;context,
+		PostEdgeFactory::NAME) ], ];
+		}</pre> </code> <p data-svelte-h="svelte-agg7ps">Importarlos con</p> <code class="svelte-1a9oexy"><pre>use AppModule\Graphql\PostConnectionFactory; use AppModule\Graphql\PostEdgeFactory;</pre> </code> <p data-svelte-h="svelte-1yt03ws">Agregar las entradas graphql para ver los registros en el método getQueryFields de la clase
+		AppModule</p> <code class="svelte-1a9oexy"><pre>function getQueryFields(): array
+		{
+
+		$authorConnection =
+		$this-&gt;context-&gt;getServiceManager()-&gt;get(AuthorConnectionFactory::NAME);
+		$postConnection =
+		$this-&gt;context-&gt;getServiceManager()-&gt;get(PostConnectionFactory::NAME); return [
+		&#39;getAuthor&#39; =&gt; GPDFieldFactory::buildFieldItem($this-&gt;context, Author::class),
+		&#39;getAuthorsList&#39; =&gt; GPDFieldFactory::buildFieldList($this-&gt;context,
+		Author::class), &#39;getAuthorsPaginatedList&#39; =&gt;
+		GPDFieldFactory::buildFieldConnection($this-&gt;context, $authorConnection, Author::class),
+		&#39;getPost&#39; =&gt; GPDFieldFactory::buildFieldItem($this-&gt;context, Post::class),
+		&#39;getPostsList&#39; =&gt; GPDFieldFactory::buildFieldList($this-&gt;context, Post::class),
+		&#39;getPostsPaginatedList&#39; =&gt; GPDFieldFactory::buildFieldConnection($this-&gt;context,
+		$postConnection, Post::class), ];
+		}</pre> </code> <p data-svelte-h="svelte-vq4fff">Agregar las entradas graphql para crear, actualizar y eliminar los registros en el método
+		getMutationFields de la clase AppModule</p> <code class="svelte-1a9oexy"><pre>function getMutationFields(): array
+		{
+		return [ &#39;createAuthor&#39; =&gt; GPDFieldFactory::buildFieldCreate($this-&gt;context, Author::class),
+		&#39;updateAuthor&#39; =&gt; GPDFieldFactory::buildFieldUpdate($this-&gt;context, Author::class),
+		&#39;deleteAuthor&#39; =&gt; GPDFieldFactory::buildFieldDelete($this-&gt;context, Author::class),
+		&#39;createPost&#39; =&gt; GPDFieldFactory::buildFieldCreate($this-&gt;context, Post::class), &#39;updatePost&#39;
+		=&gt; GPDFieldFactory::buildFieldUpdate($this-&gt;context, Post::class), &#39;deletePost&#39; =&gt;
+		GPDFieldFactory::buildFieldDelete($this-&gt;context, Post::class) ];
+		}</pre> </code> <p data-svelte-h="svelte-13ms3t5">Crear resolver para obtener los datos del autor desde el post</p> <p data-svelte-h="svelte-1o3vrxv">Se crea la clase PostResolversFactory en la carpeta modules/AppModule/src/Graphql</p> <code class="svelte-1a9oexy"><pre>&lt;?php namespace AppModule\Graphql; use AppModule\Entities\Author; use
+		GPDCore\Library\EntityBuffer; use GPDCore\Library\ResolverFactory; class PostResolversFactory
+		{
+
+		public static function getAuthorResolver()
+		{
+		$entityBuffer = new EntityBuffer(Author::class); $resolver = ResolverFactory::createEntityResolver($entityBuffer,
+		&#39;author&#39;); return $resolver;
+		} }</pre> </code> <p data-svelte-h="svelte-kgdam">El método <code>ResolverFactory::createEntityResolver</code> recibe dos parámetros el primero es
+		un objeto tipo EntityBuffer que se encarga de optimizar la consulta para obtener los datos de autores
+		de todos los post relacionados en una sola consulta (ver n+1 problem)</p> <p data-svelte-h="svelte-aoe007">El segundo parámetro corresponde al nombre de la propiedad &quot;author&quot; de la entidad Post</p> <p data-svelte-h="svelte-asouig">Se registra el resolver en el método getResolvers de la clase AppModule</p> <code class="svelte-1a9oexy"><pre>function getResolvers(): array
+		{
+		return [ &#39;Author::fullName&#39; =&gt; function ($root, $args, $context, $info) {
+		return $root[&quot;firstName&quot;] . &quot; &quot; . $root[&quot;lastName&quot;] ?? &#39;&#39;;
+		}, &#39;Post::author&#39; =&gt; PostResolversFactory::getAuthorResolver()
+		];
+		}</pre> </code> <p data-svelte-h="svelte-vh6w95">Crear resolver para obtener los datos de los post desde el autor</p> <code class="svelte-1a9oexy"><pre>&lt;?php namespace AppModule\Graphql; use AppModule\Entities\Author; use
+		AppModule\Entities\Post; use GPDCore\Library\ResolverFactory; class AuthorResolversFactory
+		{
+
+		public static function getPostResolver()
+		{
+		$resolver = ResolverFactory::createCollectionResolver(Author::class, &#39;posts&#39;, null, Post::class);
+		return $resolver;
+		} }</pre> </code> <p data-svelte-h="svelte-1pldxxd">En este caso, se utiliza <code>ResolverFactory::createCollectionResolver</code> porque se recupera
+		una lista de elementos en lugar de solo uno. Es importante destacar que cada registro de autor recupera
+		una lista de objetos Post.</p> <p data-svelte-h="svelte-1sbq0xi">Los parámetros de esta función son:</p> <ol data-svelte-h="svelte-1lu5155"><li>El nombre de la clase u objeto principal Author::class</li> <li>El nombre de la propiedad que tiene los elemento relacionados (“post”)</li> <li>La lista de relaciones ManyToOne o OneToOne de la entidad principal (opcional)</li> <li>La clase relacionada con la propiedad de los elementos relacionados que se van a consultar
+			“Post::class” (opcional)</li></ol> <p data-svelte-h="svelte-1x0n70">Los últimos 2 parámetros son opcionales pero para el correcto funcionamiento es necesario
+		asignar uno de ellos, se recomienda poner null en el tercer parámetro y asignar valor al último
+		parámetro.</p> <p data-svelte-h="svelte-1joayaa">Se agrega el resolver a la función getResolvers de la clase AppModule</p> <code class="svelte-1a9oexy"><pre>function getResolvers(): array
+		{
+		return [ &#39;Author::fullName&#39; =&gt; function ($root, $args, $context, $info) {
+		return $root[&quot;firstName&quot;] . &quot; &quot; . $root[&quot;lastName&quot;] ?? &#39;&#39;;
+		{, &#39;Post::author&#39; =&gt; PostResolversFactory::getAuthorResolver(),
+		&#39;Author::posts&#39; =&gt; AuthorResolversFactory::getPostResolver() ];
+		{</pre> </code> <p data-svelte-h="svelte-8cuysn">Para organizar mejor el código se puede pasar la funcionalidad del resolver Author::fullName a
+		un método de la clase AuthorResolversFactory</p> <code class="svelte-1a9oexy"><pre>&lt;?php namespace AppModule\Graphql; use AppModule\Entities\Author; use
+		AppModule\Entities\Post; use GPDCore\Library\ResolverFactory; class AuthorResolversFactory
+		{
+
+		public static function getPostResolver()
+		{
+		$resolver = ResolverFactory::createCollectionResolver(Author::class, &#39;posts&#39;, null, Post::class);
+		return $resolver;
+		}
+
+		public static function getFullnameResolver(): callable
+		{
+		return function ($root, $args, $context, $info) {
+		return $root[&quot;firstName&quot;] . &quot; &quot; . $root[&quot;lastName&quot;] ?? &#39;&#39;;
+		};
+		} }</pre> </code> <p data-svelte-h="svelte-1x5p2pv">Y se actualiza en AppModule</p> <code class="svelte-1a9oexy"><pre>function getResolvers(): array
+		{
+		return [ &#39;Post::author&#39; =&gt; PostResolversFactory::getAuthorResolver(), &#39;Author::posts&#39;
+		=&gt; AuthorResolversFactory::getPostResolver(), &#39;Author::fullName&#39; =&gt; AuthorResolversFactory::getFullnameResolver(),
+		];
+		}</pre> </code> <p data-svelte-h="svelte-17xt82m">Con todas estas configuraciones establecidas, ahora podemos utilizar la API para realizar una
+		variedad de acciones con respecto a los posts: visualizar, crear, actualizar y eliminar.</p> <p data-svelte-h="svelte-1uj9peu">Además, es posible obtener los datos del autor mediante una consulta del post.</p> </main> 
+			
+			<script>
+				{
+					__sveltekit_19yrj6g = {
+						base: new URL(".", location).pathname.slice(0, -1),
+						assets: "/gql-pdss-lib-docs"
+					};
+
+					const element = document.currentScript.parentElement;
+
+					const data = [null,null];
+
+					Promise.all([
+						import("./_app/immutable/entry/start.Do1vbQOV.js"),
+						import("./_app/immutable/entry/app.-Lt3VFBM.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 2],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>
